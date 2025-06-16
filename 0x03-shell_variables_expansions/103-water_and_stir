@@ -1,3 +1,2 @@
 #!/bin/bash
-to_dec() { local n=$1 b=$2 d=0 i c; for ((i=0;i<${#n};i++)); do c=$(expr index "$b" "${n:i:1}"); ((d=d*${#b}+c-1)); done; echo $d; }
-echo $(to_dec "$WATER" "water") + $(to_dec "$STIR" "stir") | bc | awk '{s=$1;b="bestchol";r="";while(s>0){r=substr(b,(s%b)+1,1)r;s=int(s/b)} print r?s:b}'
+to_dec() { local n=$1 b=$2 d=0 i c; for ((i=0;i<${#n};i++)); do c=$(expr index "$b" "${n:i:1}"); ((d=d*${#b}+c-1)); done; echo $d; } echo $(to_dec "$WATER" "water") + $(to_dec "$STIR" "stir") | bc | awk '{s=$1;b="bestchol";r="";while(s>0){r=substr(b,(s%b)+1,1)r;s=int(s/b)} print r?s:b}'
