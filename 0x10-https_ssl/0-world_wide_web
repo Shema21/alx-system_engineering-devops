@@ -4,10 +4,7 @@
 dns_conf () {
     result=$(dig +short "$2.$1")
     if [ -n "$result" ]; then
-        type=$(dig "$2.$1" +short ANY | grep -Eo 'IN\s+[A-Z]+' | awk '{print $2}' | head -n1)
-        echo "The subdomain $2 is a $type record and points to $result"
-    else
-        echo "The subdomain $2.$1 does not resolve."
+        echo "The subdomain $2 is a A record and points to $result"
     fi
 }
 
