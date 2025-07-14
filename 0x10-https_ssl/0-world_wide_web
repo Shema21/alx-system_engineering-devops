@@ -1,20 +1,16 @@
 #!/usr/bin/env bash
-# Script to query subdomain names and record types
+# Script to display DNS record info for given subdomains
 
-dns_conf () {
-    result=$(dig +short "$2.$1")
-    if [ -n "$result" ]; then
-        echo "The subdomain $2 is a A record and points to $result"
-    fi
+dns_conf() {
+    IP=$(dig +short "$2.$1")
+    echo "$2 $IP" | awk '{print "The subdomain "$1" is a A record and points to "$2}'
 }
 
 if [ "$#" -eq 1 ]; then
-  dns_conf "$1" "www"
-  dns_conf "$1" "lb-01"
-  dns_conf "$1" "web-01"
-  dns_conf "$1" "web-02"
+    dns_conf "$1" "www"
+    dns_conf "$1" "lb-01"
+    dns_conf "$1" "web-01"
+    dns_conf "$1" "web-02"
 elif [ "$#" -eq 2 ]; then
-  dns_conf "$1" "$2"
-else
-  echo "Usage: $0 domain [subdomain]"
+    dns_conf "$1" "$2"
 fi
